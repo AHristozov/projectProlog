@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prolog Животни + GIF + Описания</title>
+  <title>Prolog Коли + Снимки + Описания</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -51,23 +51,23 @@
       margin-top: 20px;
     }
 
-    .animal-table {
+    .car-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
     }
 
-    .animal-table th, .animal-table td {
+    .car-table th, .car-table td {
       border: 1px solid #ccc;
       padding: 12px;
       text-align: center;
     }
 
-    .animal-table th {
+    .car-table th {
       background-color: #e0f0ff;
     }
 
-    .animal-gif {
+    .car-img {
       max-width: 150px;
       border-radius: 10px;
       box-shadow: 0 0 10px #aaa;
@@ -80,15 +80,15 @@
   </style>
 </head>
 <body>
-  <h1>Prolog животни с правила, описания и GIF</h1>
+  <h1>Prolog коли с правила, описания и снимки</h1>
 
-  <p>Въведете Prolog заявка (пример: <code>is_predator(X).</code> или <code>is_big(X).</code>)</p>
+  <p>Въведете Prolog заявка (пример: <code>is_fast(X).</code> или <code>is_electric(X).</code>)</p>
   <textarea id="prolog-input">
 % Примери:
-is_mammal(X).
-is_big(X).
-is_predator(X).
-is_bird(X).
+is_electric(X).
+is_fast(X).
+is_suv(X).
+is_economy(X).
   </textarea>
   <button onclick="runProlog()">Изпълни</button>
 
@@ -99,49 +99,40 @@ is_bird(X).
     const session = pl.create();
 
     const knowledge = `
-      animal(lion). animal(elephant). animal(tiger). animal(eagle). animal(owl).
-      animal(crocodile). animal(kangaroo).
+      car(tesla_model_s). car(bmw_x5). car(ford_mustang). car(toyota_corolla). car(porsche_911).
 
-      mammal(lion). mammal(elephant). mammal(tiger). mammal(kangaroo).
-      big(elephant). big(crocodile). big(tiger).
-      predator(lion). predator(tiger). predator(crocodile). predator(eagle). predator(owl).
-      bird(eagle). bird(owl).
+      electric(tesla_model_s).
+      suv(bmw_x5).
+      fast(ford_mustang). fast(porsche_911).
+      economy(toyota_corolla).
 
-      is_mammal(X) :- mammal(X).
-      is_big(X) :- big(X).
-      is_predator(X) :- predator(X).
-      is_bird(X) :- bird(X).
+      is_electric(X) :- electric(X).
+      is_suv(X) :- suv(X).
+      is_fast(X) :- fast(X).
+      is_economy(X) :- economy(X).
     `;
     session.consult(knowledge);
 
-    const animalData = {
-      lion: {
-        gif: "https://media.giphy.com/media/1d5GvTI2zNdI/giphy.gif",
-        desc: "Лъвът е голям хищник и живее в саваните на Африка."
+    const carData = {
+      tesla_model_s: {
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/58/Tesla_Model_S_Plaid_IMG_5941.jpg",
+        desc: "Tesla Model S е електрическа кола с висока производителност и дълъг пробег."
       },
-      elephant: {
-        gif: "https://media.giphy.com/media/2v170e71aanfi/giphy.gif",
-        desc: "Слонът е най-голямото сухоземно животно с невероятна памет."
+      bmw_x5: {
+        img: "https://upload.wikimedia.org/wikipedia/commons/f/fb/2019_BMW_X5_xDrive30d_M_Sport_Automatic_3.0_Front.jpg",
+        desc: "BMW X5 е луксозен SUV с мощен двигател и отлична проходимост."
       },
-      tiger: {
-        gif: "https://media.giphy.com/media/fANhQpcPGr2hO/giphy.gif",
-        desc: "Тигърът е нощен хищник и отличен плувец."
+      ford_mustang: {
+        img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/2018_Ford_Mustang_GT_5.0.jpg",
+        desc: "Ford Mustang е легендарен американски спортен автомобил."
       },
-      eagle: {
-        gif: "https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif",
-        desc: "Орелът има изключително зрение и ловува от въздуха."
+      toyota_corolla: {
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/2019_Toyota_Corolla_Icon_Tech_VVT-i_HEV_CVT_1.8_Front.jpg",
+        desc: "Toyota Corolla е икономичен и надежден градски автомобил."
       },
-      owl: {
-        gif: "https://media.giphy.com/media/3ohs4B9Zz54HXGvoYs/giphy.gif",
-        desc: "Бухалът е нощна птица с тих полет и въртяща се глава."
-      },
-      crocodile: {
-        gif: "https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif",
-        desc: "Крокодилите живеят във водоеми и са древни хищници."
-      },
-      kangaroo: {
-        gif: "https://media.giphy.com/media/l0MYEw7nYdf6r62aI/giphy.gif",
-        desc: "Кенгурото е торбест бозайник, срещан най-често в Австралия."
+      porsche_911: {
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/2019_Porsche_911_Carrera_S_PDK_3.0.jpg",
+        desc: "Porsche 911 е високоскоростен спортен автомобил със световна слава."
       }
     };
 
@@ -162,7 +153,7 @@ is_bird(X).
 
       session.answers(answer => {
         if (answer === false || answer === null) {
-          if (!found) resultDiv.innerHTML = "<p>Няма намерени животни.</p>";
+          if (!found) resultDiv.innerHTML = "<p>Няма намерени коли.</p>";
           else displayTable(rows);
           return;
         }
@@ -171,32 +162,32 @@ is_bird(X).
         const match = str.match(/X = (\w+)/);
 
         if (match) {
-          const animal = match[1];
+          const car = match[1];
           found = true;
-          const data = animalData[animal];
+          const data = carData[car];
 
           if (data) {
             rows.push(`
               <tr>
-                <td><strong>${animal}</strong></td>
+                <td><strong>${car.replace(/_/g, " ")}</strong></td>
                 <td class="description">${data.desc}</td>
-                <td><img src="${data.gif}" class="animal-gif" alt="${animal} gif" /></td>
+                <td><img src="${data.img}" class="car-img" alt="${car}" /></td>
               </tr>
             `);
           } else {
-            rows.push(`<tr><td>${animal}</td><td colspan="2">Няма данни за това животно.</td></tr>`);
+            rows.push(`<tr><td>${car}</td><td colspan="2">Няма данни за тази кола.</td></tr>`);
           }
         }
       });
 
       function displayTable(rows) {
         resultDiv.innerHTML = `
-          <table class="animal-table">
+          <table class="car-table">
             <thead>
               <tr>
-                <th>Животно</th>
+                <th>Кола</th>
                 <th>Описание</th>
-                <th>GIF</th>
+                <th>Снимка</th>
               </tr>
             </thead>
             <tbody>
